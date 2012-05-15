@@ -32,6 +32,11 @@
       </exclusions>
     </dependency>
     <dependency>
+      <groupId>com.polopoly.sites.greenfieldtimes-example</groupId>
+      <artifactId>greenfieldtimes</artifactId>
+      <version>10.5-DR3-SNAPSHOT</version>
+    </dependency>
+    <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-bundle</artifactId>
       <version>1.1.5.1</version>
