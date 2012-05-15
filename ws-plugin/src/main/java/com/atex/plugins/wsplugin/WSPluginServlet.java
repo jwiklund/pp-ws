@@ -1,6 +1,5 @@
 package com.atex.plugins.wsplugin;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,8 +10,6 @@ import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.sun.jersey.api.core.ResourceConfig;
 import com.sun.jersey.spi.container.servlet.ServletContainer;
@@ -20,8 +17,14 @@ import com.sun.jersey.spi.container.servlet.WebConfig;
 
 public class WSPluginServlet extends ServletContainer {
 
-    Set<Class<?>> classes;
-    Set<Object> singletons;
+    public Set<Class<?>> classes = new HashSet<Class<?>>();
+    public Set<Object> singletons = new HashSet<Object>();
+
+    public long loadConfiguration() {
+        classes = new HashSet<Class<?>>();
+        singletons = new HashSet<Object>(Arrays.asList(new Ex(), new Hello()));
+        return 3;
+    }
 
     protected List<Class<? extends Object>> getResourceClasses()
     {
@@ -30,6 +33,12 @@ public class WSPluginServlet extends ServletContainer {
     }
 
     private ResourceConfig getDefaultResourceConfig()
+    {
+        loadConfiguration();
+        return reloadableResourceConfig();
+    }
+
+    private ResourceConfig reloadableResourceConfig()
     {
         return new ResourceConfig() {
 
@@ -60,13 +69,13 @@ public class WSPluginServlet extends ServletContainer {
             @Override
             public Set<Class<?>> getClasses()
             {
-                return new HashSet<Class<?>>();
+                return classes;
             }
 
             @Override
             public Set<Object> getSingletons()
             {
-                return new HashSet<Object>(Arrays.asList(new Ex(), new Hello(), new Other("test2")));
+                return singletons;
             }
         };
     }
@@ -81,12 +90,5 @@ public class WSPluginServlet extends ServletContainer {
     protected ResourceConfig getDefaultResourceConfig(Map<String, Object> props, WebConfig wc) throws ServletException
     {
         return getDefaultResourceConfig();
-    }
-
-    @Override
-    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        reload();
-        super.service(request, response);
     }
 }

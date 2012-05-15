@@ -9,4 +9,10 @@ public class Ex {
     public String test() {
         return "example";
     }
+
+    @GET
+    @Path("test")
+    public String test2() {
+        return "test2";
+    }
 }

@@ -26,6 +26,7 @@
     <module>ws-plugin</module>
     <module>ws-plugin-test</module>
     <module>ws-plugin-fragment</module>
+    <module>ws-plugin-rebel</module>
   </modules>
 
   <build>
