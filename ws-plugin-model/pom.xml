@@ -2,15 +2,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.atex.plugins</groupId>
-  <artifactId>ws-plugin</artifactId>
+  <artifactId>ws-plugin-model</artifactId>
   <version>0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>ws-plugin</name>
-  
+  <name>ws-plugin-model</name>
   <organization>
     <name>Atex</name>
-    <url>http://www.atex.com</url>
+    <url>http://www.atex.com/</url>
   </organization>
 
   <parent>
@@ -20,12 +19,6 @@
   </parent>
 
   <dependencies>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
-      <scope>provided</scope>
-    </dependency>
     <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-bundle</artifactId>
@@ -37,6 +30,17 @@
       <artifactId>polopoly</artifactId>
       <version>${polopoly.version}</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.atex.plugins</groupId>
+      <artifactId>ws-plugin</artifactId>
+      <version>0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.atex.plugins</groupId>
+      <artifactId>ws-plugin</artifactId>
+      <version>0.1-SNAPSHOT</version>
+      <classifier>contentdata</classifier>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -53,17 +57,9 @@
         <artifactId>p-maven-plugin</artifactId>
         <version>${polopoly.version}</version>
         <configuration>
-          <generatePluginXml>false</generatePluginXml>
+          <generatePluginXml>true</generatePluginXml>
           <optionalPolopolyDir>true</optionalPolopolyDir>
           <failOnMissingContentDataJarFile>true</failOnMissingContentDataJarFile>
-          <contentDataXmlResources>
-            <import>
-              <directory>src/main/content</directory>
-              <includes>
-                <include>*.xml</include>
-              </includes>
-            </import>
-          </contentDataXmlResources>
         </configuration>
         <executions>
           <execution>

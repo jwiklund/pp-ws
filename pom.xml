@@ -22,8 +22,17 @@
     </repository>
   </repositories>
 
+  <pluginRepositories>
+    <pluginRepository>
+      <id>polopoly-public</id>
+      <name>Polopoly Public</name>
+      <url>http://maven.polopoly.com/nexus/content/groups/polopoly-public</url>
+    </pluginRepository>
+  </pluginRepositories>
+
   <modules>
     <module>ws-plugin</module>
+    <module>ws-plugin-model</module>
     <module>ws-plugin-test</module>
     <module>ws-plugin-fragment</module>
     <module>ws-plugin-rebel</module>

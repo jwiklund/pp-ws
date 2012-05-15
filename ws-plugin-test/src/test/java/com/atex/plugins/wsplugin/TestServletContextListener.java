@@ -8,6 +8,7 @@ import com.polopoly.application.Application;
 import com.polopoly.application.ConnectionPropertiesException;
 import com.polopoly.application.IllegalApplicationStateException;
 import com.polopoly.application.PacemakerComponent;
+import com.polopoly.application.PacemakerSettings;
 import com.polopoly.application.StandardApplication;
 import com.polopoly.application.config.ConfigurationRuntimeException;
 import com.polopoly.application.servlet.ApplicationServletUtil;
@@ -27,7 +28,15 @@ public class TestServletContextListener implements ServletContextListener
 
             EjbCmClient cmClient = new EjbCmClient();
             _application.addApplicationComponent(cmClient);
-            _application.addApplicationComponent(new PacemakerComponent());
+
+            PacemakerComponent pacemaker = new PacemakerComponent();
+            PacemakerSettings settings = pacemaker.getPacemakerSettings();
+            settings.setEnabled(true);
+            settings.setFixedRate(true);
+            settings.setInterval(1);
+            pacemaker.setPacemakerSettings(settings);
+            _application.addApplicationComponent(pacemaker);
+
             _application.readConnectionProperties(ApplicationServletUtil.getConnectionProperties(sc));
 
             _application.init();

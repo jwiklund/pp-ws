@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<batch xmlns="http://www.polopoly.com/polopoly/cm/xmlio">
+  <content>
+    <metadata>
+      <contentid>
+        <major>Content</major>
+        <externalid>com.atex.plugins.ws-plugin-model.ModelWS</externalid>
+      </contentid>
+      <input-template>
+        <externalid>com.atex.plugins.ws-plugin-model.ModelWS.it</externalid>
+      </input-template>
+    </metadata>
+  </content>
+
+  <content>
+    <metadata>
+      <contentid>
+        <major>AppConfig</major>
+        <externalid>com.atex.plugins.ws-plugin.configuration</externalid>
+      </contentid>
+    </metadata>
+    <contentlist group="resources">
+      <entry mode="modify">
+        <metadata>
+          <referredContent>
+            <contentid>
+              <externalid>com.atex.plugins.ws-plugin-model.ModelWS</externalid>
+            </contentid>
+          </referredContent>
+        </metadata>
+      </entry>
+    </contentlist>
+    <component group="providers" name="com.atex.plugins.wspluginmodel.writer">com.atex.plugins.wspluginmodel.ModelWSWriter</component>
+  </content>
+</batch>

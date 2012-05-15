@@ -29,27 +29,25 @@ public class WSPluginServletProcessor extends JavassistClassBytecodeProcessor
 
         CtField lastCheck = new CtField(pool.get("long"), "generated$lastCheck", wsservlet);
         wsservlet.addField(lastCheck);
-        CtMethod methodService = new CtMethod(pool.get("void"), "service", new CtClass[] {
+        CtMethod methodService = wsservlet.getMethod("service", Descriptor.ofMethod(pool.get("void"), new CtClass[] {
             pool.get("javax.servlet.http.HttpServletRequest"),
             pool.get("javax.servlet.http.HttpServletResponse")
-        }, wsservlet);
-        methodService.setBody("{\n" +
-        		      "  if (java.lang.System.currentTimeMillis() - generated$lastCheck > 1000) {\n" +
-                              "    generated$lastCheck = java.lang.System.currentTimeMillis(); " +
-                              "    long version = loadConfiguration();\n" +
-                              "    if (generated$lastVersion < version) {\n" +
-                              "      generated$lastVersion = version;\n" +
-                              "      generated$classChange = false;\n" +
-                              "      org.zeroturnaround.javarebel.LoggerFactory.getInstance().echo(\"ws-plugin-rebel.INFO: policy configuration changed, reloading ws plugin configuration\");\n" +
-                              "      reload();\n" +
-                              "    } else if (generated$classChange) {" +
-                              "      generated$classChange = false;\n" +
-                              "      reload();\n" +
-                              "    }\n" +
-                              "    super.service($1, $2);\n" +
-                              "  }" +
-                              "}");
-        wsservlet.addMethod(methodService);
+        })); 
+        methodService.insertBefore("{\n" +
+        		           "  if (java.lang.System.currentTimeMillis() - generated$lastCheck > 1000) {\n" +
+                                   "    generated$lastCheck = java.lang.System.currentTimeMillis(); " +
+                                   "    long version = loadConfiguration();\n" +
+                                   "    if (generated$lastVersion < version) {\n" +
+                                   "      generated$lastVersion = version;\n" +
+                                   "      generated$classChange = false;\n" +
+                                   "      org.zeroturnaround.javarebel.LoggerFactory.getInstance().echo(\"ws-plugin-rebel.INFO: policy configuration changed, reloading ws plugin configuration\");\n" +
+                                   "      reload();\n" +
+                                   "    } else if (generated$classChange) {" +
+                                   "      generated$classChange = false;\n" +
+                                   "      reload();\n" +
+                                   "    }\n" +
+                                   "  }\n" +
+                                   "}");
 
         CtMethod methodInit = wsservlet.getMethod("init", Descriptor.ofMethod(pool.get("void"), new CtClass[0]));
         methodInit.insertBefore("{" +

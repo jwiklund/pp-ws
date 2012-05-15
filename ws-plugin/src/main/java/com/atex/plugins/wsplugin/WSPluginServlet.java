@@ -1,5 +1,6 @@
 package com.atex.plugins.wsplugin;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,6 +13,9 @@ import java.util.logging.Level;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.UnavailableException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Path;
 
 import com.polopoly.application.Application;
@@ -64,17 +68,37 @@ public class WSPluginServlet extends ServletContainer {
         server = cmclient.getPolicyCMServer();
         super.init();
     }
-    
+
+    @Override
+    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        try {
+            super.service(request, response);
+        } catch (UnavailableException e) {
+            throw new ServletException(e.getMessage(), e);
+        }
+    }
+
     public long loadConfiguration() {
         String pluginConfiguration = getServletConfig().getInitParameter("ws-plugin-configuration");
         if (pluginConfiguration == null) {
             pluginConfiguration = "com.atex.plugins.ws-plugin.configuration";
         }
+        HashSet<Class<?>> c = new HashSet<Class<?>>();
         HashSet<Object> s = new HashSet<Object>();
         s.add(new WSPluginRootResource(new WSPluginResourceList()));
         long changed = 0;
         try {
             Policy configuration = server.getPolicy(new ExternalContentId(pluginConfiguration));
+            for (String name : configuration.getContent().getComponentNames("providers")) {
+                String className = configuration.getContent().getComponent("providers", name);
+                try {
+                    c.add(Class.forName(className));
+                } catch (ClassNotFoundException e) {
+                    // ADD TO ROOT LIST OF FAILURES?
+                    LogUtil.getLog().log(Level.WARNING, String.format("Provider class not found '%s'", className));
+                }
+            }
             changed = configuration.getContentId().getVersion();
             if (configuration != null) {
                 ContentList resources = configuration.getContent().getContentList("resources");
@@ -93,7 +117,7 @@ public class WSPluginServlet extends ServletContainer {
         } catch (CMException e) {
             LogUtil.getLog().log(Level.WARNING, "Could not load ws-plugin configuration", e);
         }
-        classes = new HashSet<Class<?>>();
+        classes = c;
         singletons = s;
         return changed;
     }
