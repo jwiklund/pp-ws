@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.atex.plugins</groupId>
@@ -42,4 +41,42 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>polopoly-public</id>
+      <name>Polopoly Public</name>
+      <url>http://maven.polopoly.com/nexus/content/groups/polopoly-public</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.polopoly.extensions</groupId>
+        <artifactId>p-maven-plugin</artifactId>
+        <version>${polopoly.version}</version>
+        <configuration>
+          <generatePluginXml>false</generatePluginXml>
+          <optionalPolopolyDir>true</optionalPolopolyDir>
+          <failOnMissingContentDataJarFile>true</failOnMissingContentDataJarFile>
+          <contentDataXmlResources>
+            <import>
+              <directory>src/main/content</directory>
+              <includes>
+                <include>*.xml</include>
+              </includes>
+            </import>
+          </contentDataXmlResources>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>pack</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

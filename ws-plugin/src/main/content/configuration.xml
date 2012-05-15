@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<batch xmlns="http://www.polopoly.com/polopoly/cm/xmlio">
+ <content updateIfExists="false">
+    <metadata>
+      <contentid>
+        <major>AppConfig</major>
+        <externalid>com.atex.plugins.ws-plugin.configuration</externalid>
+      </contentid>
+    </metadata>
+  </content>
+</batch>

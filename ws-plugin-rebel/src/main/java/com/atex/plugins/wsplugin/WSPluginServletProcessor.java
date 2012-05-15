@@ -51,12 +51,10 @@ public class WSPluginServletProcessor extends JavassistClassBytecodeProcessor
                               "}");
         wsservlet.addMethod(methodService);
 
-        CtMethod methodInit = new CtMethod(pool.get("void"), "init", new CtClass[0], wsservlet);
-        methodInit.setBody("{" +
-        		   "  com.atex.plugins.wsplugin.WSPluginServletReloader.register($0);\n" +
-                           "  super.init();\n" +
-                           "}");
-        wsservlet.addMethod(methodInit);
+        CtMethod methodInit = wsservlet.getMethod("init", Descriptor.ofMethod(pool.get("void"), new CtClass[0]));
+        methodInit.insertBefore("{" +
+        		        "  com.atex.plugins.wsplugin.WSPluginServletReloader.register($0);\n" +
+                                "}");
 
         CtMethod methodDestroy = new CtMethod(pool.get("void"), "destroy", new CtClass[0], wsservlet);
         methodDestroy.setBody("{" +

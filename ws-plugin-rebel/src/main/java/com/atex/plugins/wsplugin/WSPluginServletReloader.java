@@ -29,7 +29,9 @@ public class WSPluginServletReloader implements ClassEventListener {
         synchronized (servlets) {
             for (WSPluginServletHolder holder : servlets) {
                 holder.reloadCachedClassNamesIfNeeded();
-                if (holder.classes.contains(reloaded.getName())) {
+                if ("com.atex.plugins.wsplugin.WSPluginServlet".equals(reloaded.getName()) ||
+                    holder.classes.contains(reloaded.getName()))
+                {
                     LoggerFactory.getInstance().echo("ws-plugin-rebel.INFO: " + reloaded.getName() + " changed, reloading ws plugin configuration");
                     holder.markReload();
                 }

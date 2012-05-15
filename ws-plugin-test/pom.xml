@@ -23,7 +23,7 @@
     <dependency>
       <groupId>com.polopoly</groupId>
       <artifactId>polopoly</artifactId>
-      <version>${polopoly.version}</version>
+      <version>10.5-DR3-SNAPSHOT</version>
       <exclusions>
         <exclusion>
           <groupId>org.slf4j</groupId>
