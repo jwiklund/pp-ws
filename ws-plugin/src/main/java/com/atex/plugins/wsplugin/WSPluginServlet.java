@@ -1,7 +1,6 @@
 package com.atex.plugins.wsplugin;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -22,8 +21,8 @@ public class WSPluginServlet extends ServletContainer {
 
     public long loadConfiguration() {
         classes = new HashSet<Class<?>>();
-        singletons = new HashSet<Object>(Arrays.asList(new Ex(), new Hello()));
-        return 3;
+        singletons = new HashSet<Object>();
+        return 0;
     }
 
     protected List<Class<? extends Object>> getResourceClasses()
