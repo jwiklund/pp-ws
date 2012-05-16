@@ -28,7 +28,10 @@ public class ModelWS extends ContentPolicy
     @GET
     public String usage()
     {
-        return "usage";
+        return "GET /{id}\n" +
+               "optional query parameters:\n" +
+               "  pretty - prettify\n" +
+               "  depth=$depth - depth to print\n";
     }
 
     @GET

@@ -22,4 +22,14 @@
     <servlet-name>ws-plugin-servlet</servlet-name>
     <url-pattern>ws/*</url-pattern>
   </servlet-mapping>
+
+  <filter>
+    <filter-name>test-user</filter-name>
+    <filter-class>com.atex.plugins.wsplugin.TestFilter</filter-class>
+  </filter>  
+
+  <filter-mapping>
+    <filter-name>test-user</filter-name>
+    <url-pattern>ws/*</url-pattern>
+  </filter-mapping>
 </web-app>

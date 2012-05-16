@@ -11,7 +11,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <polopoly.version>10.4.0-0e345d8</polopoly.version>
+    <!--  <polopoly.version>10.4.0-0e345d8</polopoly.version> -->
+    <polopoly.version>10.5-DR3-SNAPSHOT</polopoly.version>
   </properties>
 
   <repositories>

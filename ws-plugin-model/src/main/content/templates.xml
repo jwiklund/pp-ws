@@ -3,4 +3,7 @@
   <input-template name="com.atex.plugins.ws-plugin-model.ModelWS.it">
     <policy>com.atex.plugins.wspluginmodel.ModelWS</policy>
   </input-template>
+  <input-template name="com.atex.plugins.ws-plugin-model.ServiceWS.it">
+    <policy>com.atex.plugins.wspluginmodel.ServiceWS</policy>
+  </input-template>
 </template-definition>

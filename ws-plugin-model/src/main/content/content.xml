@@ -15,6 +15,18 @@
   <content>
     <metadata>
       <contentid>
+        <major>Content</major>
+        <externalid>com.atex.plugins.ws-plugin-model.ServiceWS</externalid>
+      </contentid>
+      <input-template>
+        <externalid>com.atex.plugins.ws-plugin-model.ServiceWS.it</externalid>
+      </input-template>
+    </metadata>
+  </content>
+
+  <content>
+    <metadata>
+      <contentid>
         <major>AppConfig</major>
         <externalid>com.atex.plugins.ws-plugin.configuration</externalid>
       </contentid>
@@ -29,7 +41,18 @@
           </referredContent>
         </metadata>
       </entry>
+      <entry mode="modify">
+        <metadata>
+          <referredContent>
+            <contentid>
+              <externalid>com.atex.plugins.ws-plugin-model.ServiceWS</externalid>
+            </contentid>
+          </referredContent>
+        </metadata>
+      </entry>
     </contentlist>
-    <component group="providers" name="com.atex.plugins.wspluginmodel.writer">com.atex.plugins.wspluginmodel.ModelWSWriter</component>
+    <component group="providers" name="com.atex.plugins.wspluginmodel.modelwriter">com.atex.plugins.wspluginmodel.ModelWSWriter</component>
+    <component group="providers" name="com.atex.plugins.wspluginmodel.servicewriter">com.atex.plugins.wspluginmodel.ServiceWSWriter</component>
+    <component group="providers" name="com.atex.plugins.wspluginmodel.readerwriter">com.atex.plugins.wspluginmodel.ServiceWSReader</component>
   </content>
 </batch>
