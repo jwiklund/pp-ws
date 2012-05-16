@@ -16,10 +16,8 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
 
-import com.polopoly.cm.app.policy.ContentListLazyModel;
 import com.polopoly.cm.app.policy.ContentListProviderListBased;
 import com.polopoly.model.Model;
-import com.polopoly.model.ModelTypeCompound;
 import com.polopoly.model.ModelTypeFieldData;
 import com.polopoly.model.ModelTypeFieldDataProvider;
 
