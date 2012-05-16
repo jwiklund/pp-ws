@@ -34,6 +34,7 @@
   <modules>
     <module>ws-plugin</module>
     <module>ws-plugin-model</module>
+    <module>ws-plugin-service</module>
     <module>ws-plugin-test</module>
     <module>ws-plugin-fragment</module>
     <module>ws-plugin-rebel</module>

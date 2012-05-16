@@ -21,6 +21,28 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>com.atex.plugins</groupId>
+      <artifactId>ws-plugin-model</artifactId>
+      <version>0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.atex.plugins</groupId>
+      <artifactId>ws-plugin-model</artifactId>
+      <version>0.1-SNAPSHOT</version>
+      <classifier>contentdata</classifier>
+    </dependency>
+    <dependency>
+      <groupId>com.atex.plugins</groupId>
+      <artifactId>ws-plugin-service</artifactId>
+      <version>0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.atex.plugins</groupId>
+      <artifactId>ws-plugin-service</artifactId>
+      <version>0.1-SNAPSHOT</version>
+      <classifier>contentdata</classifier>
+    </dependency>
+    <dependency>
       <groupId>com.polopoly</groupId>
       <artifactId>polopoly</artifactId>
       <version>10.5-DR3-SNAPSHOT</version>
@@ -40,17 +62,6 @@
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-bundle</artifactId>
       <version>1.1.5.1</version>
-    </dependency>
-    <dependency>
-      <groupId>com.atex.plugins</groupId>
-      <artifactId>ws-plugin-model</artifactId>
-      <version>0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>com.atex.plugins</groupId>
-      <artifactId>ws-plugin-model</artifactId>
-      <version>0.1-SNAPSHOT</version>
-      <classifier>contentdata</classifier>
     </dependency>
     <dependency>
       <groupId>jboss</groupId>
