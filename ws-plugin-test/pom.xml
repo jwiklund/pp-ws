@@ -82,4 +82,57 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.polopoly.extensions</groupId>
+        <artifactId>p-maven-plugin</artifactId>
+        <version>${polopoly.version}</version>
+        <configuration>
+          <optionalPolopolyDir>true</optionalPolopolyDir>
+          <username>sysadmin</username>
+          <password>sysadmin</password>
+          <logImport>true</logImport>
+          <connectionPropertiesUrl>http://localhost:8081/connection-properties/connection.properties</connectionPropertiesUrl>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.polopoly.jboss</groupId>
+        <artifactId>jboss-maven-plugin</artifactId>
+        <version>1.25</version>
+        <configuration>
+          <jbossHome>target/embedded-jboss</jbossHome>
+          <logToConsole>true</logToConsole>
+          <jbossDistribution>
+            <groupId>com.polopoly.jboss</groupId>
+            <artifactId>slim-jboss-4.0.5</artifactId>
+            <version>1.5</version>
+            <type>zip</type>
+          </jbossDistribution>
+          <serverPatches>
+            <serverPatch>
+              <groupId>com.polopoly</groupId>
+              <artifactId>jboss-derby-database</artifactId>
+              <version>${polopoly.version}</version>
+              <type>zip</type>
+            </serverPatch>
+          </serverPatches>
+          <deployments>
+            <deployment>
+              <groupId>com.polopoly</groupId>
+              <artifactId>cm-server</artifactId>
+              <version>${polopoly.version}</version>
+              <type>ear</type>
+            </deployment>
+            <deployment>
+              <groupId>com.polopoly</groupId>
+              <artifactId>connection-properties</artifactId>
+              <version>${polopoly.version}</version>
+              <type>war</type>
+            </deployment>
+          </deployments>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
