@@ -1,4 +1,4 @@
-* A Polopoly WebService Plugin Plugin
+* A Nitro WebService Plugin Plugin
 
 This Polopoly Nitro plugin allows other nitro plugins to provide webservices
 using simple jax-ws annotations on standard policies.
