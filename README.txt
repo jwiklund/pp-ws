@@ -3,9 +3,7 @@
 This Polopoly Nitro plugin allows other nitro plugins to provide webservices
 using simple jax-ws annotations on standard policies.
 
-** Installation
-
-*** Minimal Installation
+** Minimal Installation
 
 Include the dependencies com.atex.plugins:ws-plugin-fragment:0.1-SNAPSHOT and
 com.atex.plugins:ws-plugin:contentdata:0.1-SNAPSHOT to the dependencies of
@@ -27,7 +25,17 @@ under the <dependencies> tag in webapp-polopoly/pom.xml in greenfield online.
 
 This will install the web service under /polopoly/content/service/*
 
-*** Test the plugins standalone
+*** Example services installation
+
+To install the /model service include the following dependencies like above
+com.atex.plugins:ws-plugin-model:0.1-SNAPSHOT
+com.atex.plugins:ws-plugin-model:contentdata:0.1-SNAPSHOT
+
+To install the /service service include the following dependencies like above
+com.atex.plugins:ws-plugin-service:0.1-SNAPSHOT
+com.atex.plugins:ws-plugin-service:contentdata:0.1-SNAPSHOT
+
+** Test the plugins standalone
 
 # Build the project
 mvn install
@@ -45,23 +53,13 @@ mvn -Dp.connectionPropertiesUrl=http://localhost:8081/connection-properties/conn
 curl localhost:9090/ws
 
 # Test the model service
-curl localhost:9090/ws/model/example.demo.article.MotorScooters
+curl 'localhost:9090/ws/model/example.demo.article.MotorScooters?pretty&depth=2'
 
 # Test the service service
 curl localhost:9090/ws/service/com.atex.plugins.ws-plugin.configuration
 curl --data-binary '{"components":{"group":{"name":"value"}}}' -X PUT localhost:9090/ws/service 
 
-*** Example services installation
-
-To install the /model service include the following dependencies like above
-com.atex.plugins:ws-plugin-model:0.1-SNAPSHOT
-com.atex.plugins:ws-plugin-model:contentdata:0.1-SNAPSHOT
-
-To install the /service service include the following dependencies like above
-com.atex.plugins:ws-plugin-service:0.1-SNAPSHOT
-com.atex.plugins:ws-plugin-service:contentdata:0.1-SNAPSHOT
-
-** Usage
+** Developing WS Plugins
 
 Annotate the policy class with @Path and @GET like normal jax-ws web services
 and then include an instance of that input template in the 'resources' list
