@@ -27,6 +27,30 @@ under the <dependencies> tag in webapp-polopoly/pom.xml in greenfield online.
 
 This will install the web service under /polopoly/content/service/*
 
+*** Test the plugins standalone
+
+# Build the project
+mvn install
+
+# Go to the ws-plugin-test directory and start jboss
+mvn jboss:start
+
+# Import configuration (and greenfield times)
+mvn p:import-scan -Dimport-scan.daemon=true
+
+# Run the web service on port 9090 under ws by invoking maven
+mvn -Dp.connectionPropertiesUrl=http://localhost:8081/connection-properties/connection.properties -Dexec.mainClass=com.atex.plugins.wsplugin.RunWar exec:java
+
+# Check what services are installed
+curl localhost:9090/ws
+
+# Test the model service
+curl localhost:9090/ws/model/example.demo.article.MotorScooters
+
+# Test the service service
+curl localhost:9090/ws/service/com.atex.plugins.ws-plugin.configuration
+curl --data-binary '{"components":{"group":{"name":"value"}}}' -X PUT localhost:9090/ws/service 
+
 *** Example services installation
 
 To install the /model service include the following dependencies like above
