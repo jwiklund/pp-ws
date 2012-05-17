@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>ws-plugin-service</artifactId>
+  <packaging>jar</packaging>
+
+  <name>ws-plugin-service</name>
+  <organization>
+    <name>Atex</name>
+    <url>http://www.atex.com/</url>
+  </organization>
+
+  <parent>
+    <groupId>com.atex.plugins</groupId>
+    <artifactId>ws-plugin-modules</artifactId>
+    <version>0.1-SNAPSHOT</version>
+  </parent>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-bundle</artifactId>
+      <version>1.1.5.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.polopoly</groupId>
+      <artifactId>polopoly</artifactId>
+      <version>${polopoly.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.atex.plugins</groupId>
+      <artifactId>ws-plugin</artifactId>
+      <version>0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.atex.plugins</groupId>
+      <artifactId>ws-plugin</artifactId>
+      <version>0.1-SNAPSHOT</version>
+      <classifier>contentdata</classifier>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.polopoly.extensions</groupId>
+        <artifactId>p-maven-plugin</artifactId>
+        <version>${polopoly.version}</version>
+        <configuration>
+          <generatePluginXml>true</generatePluginXml>
+          <optionalPolopolyDir>true</optionalPolopolyDir>
+          <failOnMissingContentDataJarFile>true</failOnMissingContentDataJarFile>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>pack</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
