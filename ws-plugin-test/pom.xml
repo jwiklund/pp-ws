@@ -97,6 +97,98 @@
         </configuration>
       </plugin>
       <plugin>
+        <groupId>com.polopoly.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>7.4.5-polopoly-1.9</version>
+        <dependencies>
+          <dependency>
+            <groupId>jboss</groupId>
+            <artifactId>jboss-client-libraries</artifactId>
+            <version>4.0.5</version>
+            <type>pom</type>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <scanIntervalSeconds>0</scanIntervalSeconds>
+          <webAppConfig>
+            <contextPath>/ws</contextPath>
+          </webAppConfig>
+          <systemProperties>
+            <systemProperty>
+              <name>polopoly.forcePreviewWithoutGui</name>
+              <value>true</value>
+            </systemProperty>
+            <systemProperty>
+              <name>clientCacheBaseDir</name>
+              <value>target/tmp</value>
+            </systemProperty>
+            <systemProperty>
+              <name>statisticsBaseDirectory</name>
+              <value>target/stats</value>
+            </systemProperty>
+            <systemProperty>
+              <name>solr.solr.home</name>
+              <value>target/solr</value>
+            </systemProperty>
+            <systemProperty>
+              <name>reindexIfEmptyIndex</name>
+              <value>true</value>
+            </systemProperty>
+            <systemProperty>
+              <name>p.connectionPropertiesUrl</name>
+              <value>http://localhost:8081/connection-properties/connection.properties</value>
+            </systemProperty>
+          </systemProperties>
+          <externalArtifactContextHandlers>
+            <contextHandler implementation="org.mortbay.jetty.plugin.JettyWebAppContext">
+              <warArtifact>
+                <groupId>com.polopoly.sites.greenfieldtimes-example</groupId>
+                <artifactId>server-statistics</artifactId>
+                <version>${polopoly.version}</version>
+                <type>war</type>
+              </warArtifact>
+              <contextPath>/statistics-server</contextPath>
+            </contextHandler>
+            <contextHandler implementation="org.mortbay.jetty.plugin.JettyWebAppContext">
+              <warArtifact>
+                <groupId>org.apache.solr</groupId>
+                <artifactId>solr</artifactId>
+                <version>1.4.1</version>
+                <type>war</type>
+              </warArtifact>
+              <contextPath>/solr</contextPath>
+            </contextHandler>
+            <contextHandler implementation="org.mortbay.jetty.plugin.JettyWebAppContext">
+              <warArtifact>
+                <groupId>com.polopoly.sites.greenfieldtimes-example</groupId>
+                <artifactId>server-solr-indexer</artifactId>
+                <version>${polopoly.version}</version>
+                <type>war</type>
+              </warArtifact>
+              <contextPath>/solr-indexer</contextPath>
+            </contextHandler>
+            <contextHandler implementation="org.mortbay.jetty.plugin.JettyWebAppContext">
+              <warArtifact>
+                <groupId>com.polopoly.sites.greenfieldtimes-example</groupId>
+                <artifactId>webapp-polopoly</artifactId>
+                <version>${polopoly.version}</version>
+                <type>war</type>
+              </warArtifact>
+              <contextPath>/polopoly</contextPath>
+            </contextHandler>
+            <contextHandler implementation="org.mortbay.jetty.plugin.JettyWebAppContext">
+              <warArtifact>
+                <groupId>com.polopoly.sites.greenfieldtimes-example</groupId>
+                <artifactId>webapp-dispatcher</artifactId>
+                <version>${polopoly.version}</version>
+                <type>war</type>
+              </warArtifact>
+              <contextPath>/</contextPath>
+            </contextHandler>
+          </externalArtifactContextHandlers>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>com.polopoly.jboss</groupId>
         <artifactId>jboss-maven-plugin</artifactId>
         <version>1.25</version>
@@ -133,6 +225,62 @@
           </deployments>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.3</version>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.polopoly.sites.greenfieldtimes-example</groupId>
+                  <artifactId>top</artifactId>
+                  <version>${polopoly.version}</version>
+                  <classifier>solr-home</classifier>
+                  <type>zip</type>
+                  <outputDirectory>target/solr</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
+    <pluginManagement>
+      <plugins>
+        <!--  m2eclipse does not support the unpack goal in maven-dependency-plugin
+              and complains with an error, so we ignore it in m2eclipse.
+              See http://wiki.eclipse.org/M2E_plugin_execution_not_covered -->
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <versionRange>[2.3,)</versionRange>
+                    <goals>
+                      <goal>unpack</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore />
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
 </project>
