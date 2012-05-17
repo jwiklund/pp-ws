@@ -34,7 +34,8 @@ import com.sun.jersey.api.core.ResourceConfig;
 import com.sun.jersey.spi.container.servlet.ServletContainer;
 import com.sun.jersey.spi.container.servlet.WebConfig;
 
-public class WSPluginServlet extends ServletContainer {
+public class WSPluginServlet extends ServletContainer 
+{
 
     protected final class WSPluginResourceList implements Iterable<String> {
         public Iterator<String> iterator()

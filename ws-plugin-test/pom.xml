@@ -45,7 +45,7 @@
     <dependency>
       <groupId>com.polopoly</groupId>
       <artifactId>polopoly</artifactId>
-      <version>10.5-DR3-SNAPSHOT</version>
+      <version>${polopoly.version}</version>
       <exclusions>
         <exclusion>
           <groupId>org.slf4j</groupId>
@@ -56,7 +56,13 @@
     <dependency>
       <groupId>com.polopoly.sites.greenfieldtimes-example</groupId>
       <artifactId>greenfieldtimes</artifactId>
-      <version>10.5-DR3-SNAPSHOT</version>
+      <version>${polopoly.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.polopoly.sites.greenfieldtimes-example</groupId>
+      <artifactId>resources</artifactId>
+      <version>${polopoly.version}</version>
+      <classifier>contentdata</classifier>
     </dependency>
     <dependency>
       <groupId>com.sun.jersey</groupId>

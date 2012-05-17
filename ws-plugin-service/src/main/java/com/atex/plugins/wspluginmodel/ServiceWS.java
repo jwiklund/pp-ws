@@ -85,7 +85,7 @@ public class ServiceWS extends ContentPolicy
         String op = null;
         if (id == null) {
             command = client.getContentRepository().getContentService().createNewContent(major, true, ContentService.DEFAULT_VERSION_INFO_HISTORY, caller);
-            command.setContentData(data);             
+            command.getContentData().copy(data);
             op = "created";
         }
         else if (id.param instanceof ExternalContentId) {
@@ -97,7 +97,7 @@ public class ServiceWS extends ContentPolicy
             } catch (ContentOperationFailedException e) {
                 command = client.getContentRepository().getContentService().createNewContent(major, true, ContentService.DEFAULT_VERSION_INFO_HISTORY, caller);
                 command.setExternalId(id.origin);
-                command.setContentData(data);             
+                command.getContentData().copy(data);
                 op = "created";
             }
         } else {
