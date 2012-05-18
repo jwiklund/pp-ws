@@ -31,9 +31,15 @@ To install the /model service include the following dependencies like above
 com.atex.plugins:ws-plugin-model:0.1-SNAPSHOT
 com.atex.plugins:ws-plugin-model:contentdata:0.1-SNAPSHOT
 
+(if the ws-plugin is installed like above, try
+curl localhost:8080/polopoly/content/service/model/example.demo.article.MotorScooters?pretty )
+
 To install the /service service include the following dependencies like above
 com.atex.plugins:ws-plugin-service:0.1-SNAPSHOT
 com.atex.plugins:ws-plugin-service:contentdata:0.1-SNAPSHOT
+
+(if the ws-plugin is installed like above, try
+curl localhost:8080/polopoly/content/service/service/com.atex.plugins.ws-plugin.configuration )
 
 ** Test the plugins standalone
 
@@ -128,5 +134,5 @@ Also see ws-plugin-model and ws-plugin-service for full examples of the project 
 
 To enable auto reconfiguration of the web service on updated content configuration or changed
 policy code changes add the ws-plugin-rebel plugin when running jrebel by adding the
-system properties -Dws-plugin.enabled=true -Drebel.plugins=ws-plugin-rebel/target/ws-plugin-rebel-0.1-SNAPSHOT.jar
+system properties -Dws-plugin.enabled=true -Drebel.plugins=${ws-plugin.path}/ws-plugin-rebel/target/ws-plugin-rebel-0.1-SNAPSHOT.jar
 when running the container.
